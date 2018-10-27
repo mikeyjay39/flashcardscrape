@@ -25,10 +25,26 @@ public class Scrape {
         String url = "https://quizlet.com/149375456/cs6400-chapter-4-flash-cards/";
         String class1 = "SetPageTerm-wordText";
         String class2 = "SetPageTerm-definitionText";
+        String classquizlet1 = "SetPageTerm-wordText";
+        String classquizlet2 = "SetPageTerm-definitionText";
+        String classbrainscape1 = "card-question";
+        String classbrainscape2 = "card-answer";
         if (args.length > 0) {
             url = args[0];
-            class1 = args[1];
-            class2 = args[2];
+            if (args.length > 1) {
+                class1 = args[1];
+                class2 = args[2];
+            }
+            else {
+                if (url.contains("quizlet")) {
+                    class1 = classquizlet1;
+                    class2 = classquizlet2;
+                }
+                else if (url.contains("brainscape")) {
+                    class1 = classbrainscape1;
+                    class2 = classbrainscape2;
+                }
+            }
         }
         Document document = Jsoup.connect(url).get();
 
